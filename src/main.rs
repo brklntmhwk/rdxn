@@ -6,7 +6,7 @@ struct Args {
     /// Input positive integers
     input: f64,
     /// Output's base
-    #[arg(short, long)]
+    #[arg(short, long, default_value_t = 16)]
     base: usize,
 }
 

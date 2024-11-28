@@ -1,6 +1,6 @@
 pub fn fmt_radix<T: Into<f64>>(x: T, base: usize) -> Result<String, String> {
-    if base > 36 && base < 2 {
-        return Err(format!("{} is unsupported as base.", base));
+    if base > 36 || base < 2 {
+        return Err(format!("{} is not supported as base.", base));
     }
 
     let table: Vec<char> = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ".chars().collect();
