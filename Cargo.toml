@@ -1,0 +1,15 @@
+[package]
+name = "rdxn"
+version = "0.1.0"
+edition = "2021"
+authors = ["brklntmhwk <contact@younagi.dev>"]
+license = "MIT"
+description = "A CLI tool to convert numbers to radix 𝑛 (𝑛 ∈ N, N = {1,2,3,...,32})"
+readme = "README.md"
+repository = "https://github.com/brklntmhwk/rdxn"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+anyhow = "1.0.93"
+clap = { version = "4.5.21", features = ["derive"] }
