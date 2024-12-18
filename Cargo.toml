@@ -4,13 +4,15 @@ version = "0.1.0"
 edition = "2021"
 authors = ["brklntmhwk <contact@younagi.dev>"]
 license = "MIT"
-description = "A CLI tool to convert numbers to a radix 𝑛, where 𝑛 is a positive integer (𝑛 > 1)"
+description = "A CLI tool to convert a numerical value to a radix 𝑛, where 𝑛 is a positive integer ( 1 < 𝑛 < 37)"
 readme = "README.md"
 repository = "https://github.com/brklntmhwk/rdxn"
 keywords = ["radix", "base", "maths", "hexadecimal", "binary"]
 
-# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
-
 [dependencies]
 anyhow = "1.0.93"
 clap = { version = "4.5.21", features = ["derive"] }
+
+[dev-dependencies]
+assert_cmd = "2.0.14"
+predicates = "3.1.0"
