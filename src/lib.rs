@@ -1,7 +1,7 @@
 /// Calculate the input numerical value in the given base
-pub fn fmt_radix<T: Into<f64>>(x: T, base: usize) -> Result<String, String> {
+pub fn fmt_radix<T: Into<f64>>(x: T, base: usize, dp: usize) -> Result<String, String> {
     // return an error message if the given base is invalid
-    // the base must be less than or equal to 36 (The maximum expressible by 0 to 9 and A to Z)
+    // the base must be less than 36 (The maximum expressible by 0 to 9 and A to Z)
     if base > 36 || base < 2 {
         return Err(format!("{} is not supported as base.", base));
     }
@@ -23,10 +23,12 @@ pub fn fmt_radix<T: Into<f64>>(x: T, base: usize) -> Result<String, String> {
     while integral >= base as i64 {
         // add the remainder to the container
         base_int.push(table[(integral % base as i64) as usize]);
+
         // divide the integer by the given base and then assign the resultant value to itself
         integral /= base as i64;
     }
 
+    // finally divide the integer by the given base where the former is less than the latter
     base_int.push(table[integral as usize]);
 
     // add a negative sign to the container if the input is so
@@ -37,7 +39,7 @@ pub fn fmt_radix<T: Into<f64>>(x: T, base: usize) -> Result<String, String> {
     // reverse the order of the resultant integral part and then reassign it to the container
     let base_int = base_int.chars().rev().collect::<String>();
 
-    //
+    // get the absolute value of the fractional part
     let mut fract = x.abs().fract();
 
     // prepare a `String` container for the resultant integral part in the base
@@ -45,7 +47,6 @@ pub fn fmt_radix<T: Into<f64>>(x: T, base: usize) -> Result<String, String> {
 
     // prepare a counter for the following loop
     let mut i = 0;
-
     loop {
         // multiply the fraction by the given base and then assign the resultant value to itself
         fract *= base as f64;
@@ -56,12 +57,12 @@ pub fn fmt_radix<T: Into<f64>>(x: T, base: usize) -> Result<String, String> {
         // increment the counter
         i += 1;
 
-        //
-        if fract.fract() == 0. || i >= 15 {
+        // break out of the loop if the fractional part becomes 0 or it reaches 15 decimal points
+        if fract.fract() == 0. || i > dp {
             break;
         }
 
-        //
+        // get the fractional part only again
         fract = fract.fract();
     }
 
